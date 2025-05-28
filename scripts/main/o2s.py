@@ -1,3 +1,22 @@
+"""
+o2s.py - Obstacles to Solutions (O2S) Workflow Script
+
+This script automates the process of generating community-driven solutions for
+identified obstacles using GPT-4. It loads a tree of obstacles, queries GPT-4
+for solutions to each leaf node (obstacle), and saves the results in a structured
+JSON format. The workflow is configurable via a YAML file and maintains a cache
+to optimize repeated LLM calls.
+
+Main Steps:
+1. Load configuration and obstacle tree.
+2. For each obstacle (leaf node), generate solutions using GPT-4.
+3. Insert solutions into the tree and save progress.
+4. Maintain a cache and log progress for reproducibility.
+
+Usage:
+    python o2s.py <working_directory_path>
+"""
+
 import os
 import json
 import logging
@@ -26,7 +45,14 @@ path = None    # Will hold the working directory path
 def add_solutions4(node):
     """
     Generate and insert solutions for a given obstacle node using GPT-4.
-    The solutions are inserted as child nodes under the given node.
+
+    Args:
+        node: A tree node representing an obstacle. The node must have a 'data' attribute.
+
+    Side Effects:
+        - Calls GPT-4 to generate solutions.
+        - Inserts solutions as child nodes under the given node.
+        - May limit the number of solutions based on config.
     """
     global config
     if config is None:
@@ -49,6 +75,12 @@ def add_solutions4(node):
 def save_tree(filename="s.json"):
     """
     Save the current tree structure to a JSON file.
+
+    Args:
+        filename (str): The name of the file to save the tree to (default: 's.json').
+
+    Raises:
+        ValueError: If the working directory path is not set.
     """
     global path
     if path is None:
@@ -62,7 +94,12 @@ def save_tree(filename="s.json"):
 def main():
     """
     Main entry point for the O2S (Obstacles to Solutions) workflow.
+
     Loads configuration, tree, and cache, then generates solutions for each leaf node.
+    Saves progress and cache after each node is processed.
+
+    Returns:
+        int: Exit code (0 for success, 1 for usage error).
     """
     global config
     global path
@@ -81,11 +118,6 @@ def main():
 
     # Load the obstacle tree from o.json
     load_tree(os.path.join(path, "o.json"))
-
-    # Save the initial tree structure for debugging purposes
-    # j = json.loads(tree.to_json(with_data=True))
-    # with open(os.path.join(path, "debug.json"), "w", encoding='utf-8') as f:
-    #     json.dump(j, f)
 
     # Set up a rotating file handler for logging
     log_filename = os.path.join(path, "o2s.log")
