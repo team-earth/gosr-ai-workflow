@@ -92,81 +92,84 @@ python scripts/convert/json2mm.py projects/unlonely-nyc/ --stage s
 
 ## Script Reference
 
-To help you automate each stage of the GOSR workflow and manage your outputs, this section documents the main scripts, their purpose, and usage.
+Automate each stage of the GOSR workflow with these scripts. All “main” scripts take exactly one positional argument: the path to your project directory (which must contain `config.yaml`).
 
-### Core GOSR Scripts (scripts/main)
+### Core GOSR Scripts (`scripts/main`)
 
 1. **g2o.py**  
-   - Purpose: AI-assisted generation of Obstacles from your defined Goal.  
+   - Purpose: Generate a first-draft list of Obstacles from your Goal.  
    - Usage:
-     ```sh
-     python scripts/main/g2o.py <project_dir> [--model MODEL] [--output obstacles.json]
+     ```bash
+     python scripts/main/g2o.py <project_dir>
      ```
-   - Outputs: `obstacles.json` in the project directory.
+   - Inputs:  
+     - [config.yaml](http://_vscodecontentref_/0) (must include `future_picture`, `root_node_name`, `root_question`, `locality`, `country`, etc.)  
+   - Outputs:  
+     - `o.json` (or `obstacles.json`), a structured list of obstacles.
 
 2. **o2s.py**  
-   - Purpose: AI-assisted brainstorming of Solutions for each obstacle.  
+   - Purpose: Generate a first-draft list of Solutions for each obstacle.  
    - Usage:
-     ```sh
-     python scripts/main/o2s.py <project_dir> [--model MODEL] [--output solutions.json]
+     ```bash
+     python scripts/main/o2s.py <project_dir>
      ```
-   - Inputs: `obstacles.json`  
-   - Outputs: `solutions.json`
+   - Inputs:  
+     - The obstacles file produced by `g2o.py` (`o.json` or `obstacles.json`).  
+   - Outputs:  
+     - [s.json](http://_vscodecontentref_/1) (or `solutions.json`).
 
 3. **s2r.py**  
-   - Purpose: AI-assisted discovery and mapping of Resources to each solution.  
+   - Purpose: Generate a first-draft list of Resources for each solution.  
    - Usage:
-     ```sh
-     python scripts/main/s2r.py <project_dir> [--model MODEL] [--output resources_raw.json]
+     ```bash
+     python scripts/main/s2r.py <project_dir>
      ```
-   - Inputs: `solutions.json`  
-   - Outputs: `resources_raw.json`
+   - Inputs:  
+     - The solutions file from `o2s.py` ([s.json](http://_vscodecontentref_/2) or `solutions.json`).  
+   - Outputs:  
+     - [r.json](http://_vscodecontentref_/3) (or `resources_raw.json`).
 
-### Utility Scripts (scripts/utils)
+### Utility Scripts ([utils](http://_vscodecontentref_/4))
 
-1. **raw2resources.py**  
-   - Purpose: Clean and normalize the raw resource output into a structured `resources.json`.  
-   - Usage:
-     ```sh
-     python scripts/utils/raw2resources.py <project_dir>
-     ```
-   - Inputs: `resources_raw.json`  
-   - Outputs: `resources.json`
+- **raw2resources.py**  
+  - Purpose: Clean & normalize `resources_raw.json` into `resources.json`.  
+  - Usage:
+    ```bash
+    python scripts/utils/raw2resources.py <project_dir>
+    ```
 
-2. **recheck_resource_urls.py**  
-   - Purpose: Validate and fix broken URLs in `resources.json`.  
-   - Usage:
-     ```sh
-     python scripts/utils/recheck_resource_urls.py <project_dir> [--timeout SECONDS]
-     ```
-   - Inputs/Outputs: `resources.json`
+- **recheck_resource_urls.py**  
+  - Purpose: Validate and fix broken URLs in `resources.json`.  
+  - Usage:
+    ```bash
+    python scripts/utils/recheck_resource_urls.py <project_dir> [--timeout SECONDS]
+    ```
 
-### Conversion & Export Scripts (scripts/convert)
+### Conversion & Export Scripts ([convert](http://_vscodecontentref_/5))
 
-1. **json2doc.py**  
-   - Purpose: Export your G/O/S/R data to a Word document.  
-   - Usage:
-     ```sh
-     python scripts/convert/json2doc.py <project_dir> --stage <g|o|s|r> [--format docx]
-     ```
-   - Example:
-     ```sh
-     python scripts/convert/json2doc.py projects/unlonely-nyc --stage r
-     ```
+- **[json2doc.py](http://_vscodecontentref_/6)**  
+  - Purpose: Build a DOCX outline (with headings, bookmarks, and hyperlinks) from your [s.json](http://_vscodecontentref_/7)/[r.json](http://_vscodecontentref_/8) and `resources.json`.  
+  - Usage:
+    ```bash
+    python scripts/convert/json2doc.py <project_dir> --stage <s|r>
+    ```
+  - Flags:
+    - `--stage s` to document solutions ([s.json](http://_vscodecontentref_/9))
+    - `--stage r` to document resources ([r.json](http://_vscodecontentref_/10) + `resources.json`)
 
-2. **json2mm.py**  
-   - Purpose: Export Solutions (or any stage) as a mind-map (`.mm` format).  
-   - Usage:
-     ```sh
-     python scripts/convert/json2mm.py <project_dir> --stage <g|o|s|r>
-     ```
+- **json2mm.py**  
+  - Purpose: Export any stage (`g`, `o`, [s](http://_vscodecontentref_/11), or [r](http://_vscodecontentref_/12)) as a FreeMind mind-map (`.mm`).  
+  - Usage:
+    ```bash
+    python scripts/convert/json2mm.py <project_dir> --stage <g|o|s|r>
+    ```
 
-3. **r2google-maps.py**  
-   - Purpose: Generate a Google Maps HTML overlay of your resources.  
-   - Usage:
-     ```sh
-     python scripts/convert/r2google-maps.py <project_dir> [--output map.html]
-     ```
+- **r2google-maps.py**  
+  - Purpose: Generate a Google Maps HTML overlay from `resources.json`.  
+  - Usage:
+    ```bash
+    python scripts/convert/r2google-maps.py <project_dir> [--output map.html]
+    ```
 
 ---
 
