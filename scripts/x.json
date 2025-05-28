@@ -1,0 +1,26 @@
+{'ImpactPotential': {'BreadthOfImpact': {'description': 'The range or number of people and sectors within the community that the solution can positively affect.', 'rating': 7
+        }, 'DepthOfImpact': {'description': 'The extent to which the solution can profoundly affect the problem it aims to address, including long-term benefits.', 'rating': 6
+        }, 'UrgencyOfNeed': {'description': 'Prioritization based on the immediacy of the need for the solution within the community.', 'rating': 8
+        }
+    }, 'Feasibility': {'TechnicalViability': {'description': 'The existence of technology and expertise to implement the solution effectively.', 'rating': 9
+        }, 'FinancialPracticality': {'description': 'Costs associated with implementing and maintaining the solution, including the availability of funding sources.', 'rating': 7
+        }, 'RegulatoryCompliance': {'description': "The solution's alignment with current laws and regulations, including the ease of navigating any legal barriers.", 'rating': 8
+        }
+    }, 'Innovativeness': {'Originality': {'description': 'The uniqueness of the solution compared to existing approaches.', 'rating': 5
+        }, 'ApplicationOfTechnology': {'description': 'Innovative use of technology or novel combinations of existing technologies.', 'rating': 6
+        }, 'ProblemSolvingApproach': {'description': 'The uniqueness in addressing the root causes of the societal problem rather than just symptoms.', 'rating': 6
+        }
+    }, 'Scalability': {'Adaptability': {'description': 'The ability to modify the solution for different contexts or scales without significant additional costs.', 'rating': 7
+        }, 'GrowthPotential': {'description': 'The potential for the solution to expand its reach or impact over time.', 'rating': 7
+        }, 'Replicability': {'description': 'The ease with which other communities can adopt the solution.', 'rating': 8
+        }
+    }, 'CommunityEngagement': {'Inclusivity': {'description': 'The extent to which the solution involves diverse segments of the community, including marginalized or underserved groups.', 'rating': 7
+        }, 'ParticipationMechanisms': {'description': 'The ways in which the community can contribute to, or have a say in, the implementation and ongoing operations of the solution.', 'rating': 6
+        }, 'AwarenessAndEducation': {'description': 'Efforts to inform and educate the community about the solution and its benefits, fostering a sense of ownership and support.', 'rating': 7
+        }
+    }, 'Sustainability': {'EnvironmentalConsiderations': {'description': "The solution's impact on the environment, including any efforts to minimize carbon footprint and waste.", 'rating': 7
+        }, 'EconomicSustainability': {'description': 'Whether the solution can be maintained financially over the long term, considering operational costs and potential revenue streams.', 'rating': 6
+        }, 'SocialSustainability': {'description': 'The solution’s contribution to the social fabric of the community, including social equity and well-being.', 'rating': 7
+        }
+    }
+}
