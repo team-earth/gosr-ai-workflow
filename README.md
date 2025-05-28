@@ -1,20 +1,35 @@
-# AI Problem Structuring
+# AI-Powered Problem Structuring Toolkit
 
-## GOSR Workflow Overview
+## Overview
 
-This project implements the **GOSR** (Goal → Obstacles → Solutions → Resources) workflow for structured problem-solving and resource mapping.  
-Each phase is handled by a dedicated script in the `scripts/main/` directory:
+This project implements the **GOSR** (Goal ← Obstacles ← Solutions ← Resources) framework to address complex societal challenges — often referred to as "wicked problems" — using a structured, AI-augmented process.
 
-- **g2o.py**: Converts a Goal into a structured list of Obstacles.
-- **o2s.py**: Converts Obstacles into Solutions.
-- **s2r.py**: Maps Solutions to Resources.
+Inspired by systems thinking and grounded in cognitive problem-solving theory, GOSR helps communities map out the path from a future vision to the local resources that can help realize it. It supports stakeholders in building a **shared language**, fostering **collective agency**, and visualizing an actionable roadmap.
 
-### Workflow Steps
+### Purpose
+This toolkit provides:
+- A structured process for turning complex goals into actionable maps.
+- Python scripts and prompts for using AI to accelerate initial drafts.
+- Tools to visualize and refine solutions and resource mappings.
 
-1. **Goal**: Define your main objective or vision.
-2. **Obstacles**: Identify what stands in the way of achieving the goal.
-3. **Solutions**: Brainstorm or generate ways to overcome each obstacle.
-4. **Resources**: Find or suggest resources that can help implement each solution.
+### Reference Framework
+The model is rooted in:
+- Kells, K. (2019). [*A Proposed Practical Problem-Solving Framework...*](https://arxiv.org/abs/1911.13155)
+- Kells, K. (2020). [*A Technology-Assisted Social Computing Framework for Solving Complex Social Problems.*](https://www.humancomputation.com/2020/papers.html)
+
+---
+
+## How AI Accelerates This Framework
+
+In traditional settings, the GOSR process takes 3–6 months via stakeholder meetings. AI allows rapid prototyping:
+
+| Step                 | With AI                      | Time                |
+|----------------------|------------------------------|---------------------|
+| Define Goal (G)      | Human or AI-assisted draft   | 15 min              |
+| List Obstacles (O)   | AI suggestion of ~10 themes  | 30 min              |
+| Subdivide Obstacles  | AI generates 100 sub-parts   | 30 min              |
+| Map Solutions (S)    | AI brainstorms 1,000 ideas   | 12 hours (½ day)    |
+| Suggest Resources (R)| AI identifies 1K–5K resources| 120 hours (5 days)  |
 
 ---
 
@@ -23,190 +38,162 @@ Each phase is handled by a dedicated script in the `scripts/main/` directory:
 ```
 ai/
 ├── scripts/
-│   ├── main/        # Main workflow scripts (core pipeline)
-│   │   ├── g2o.py
-│   │   ├── o2s.py
-│   │   └── s2r.py
-│   ├── convert/     # Conversion/export scripts (for docs, maps, etc.)
-│   │   ├── json2doc.py
-│   │   ├── json2mm.py
-│   │   ├── json2map.py
-│   │   └── r2google-maps.py
-│   ├── utils/       # Standalone utility/cleaning scripts
-│   │   └── recheck_resource_urls.py
-│   └── lib/         # Shared libraries/modules
-│       └── utils.py
+│   ├── main/        # Core GOSR pipeline
+│   ├── convert/     # Export to DOCX, mind map, Google Maps
+│   ├── utils/       # URL cleaning, validation
+│   └── lib/         # Shared Python modules
 ├── requirements.txt
 ├── README.md
-└── ...
 ```
 
-- **main/**: Core GOSR workflow scripts.
-- **convert/**: Scripts for exporting/converting data (e.g., to DOCX, mind maps, Google Maps CSV).
-- **utils/**: Standalone utility scripts (e.g., data cleaning, validation).
-- **lib/**: Shared Python modules (imported by other scripts).
-
 ---
 
-## Configuration & Parameterization
+## Example Workflow
 
-The workflow is configured using a `config.yaml` file, which must be present in your project directory (e.g., in `projects/your-project/`).  
-This file defines the context and parameters for your run.
-
-### Required Parameters
-
-- **future_picture**:  
-  The main goal or vision statement you want to achieve.
-
-- **root_node_name**:  
-  The label for the root node in the problem tree (usually the goal itself).
-
-- **root_question**:  
-  A prompt or question that will be used to generate obstacles for the goal.
-
-- **locality**:  
-  The city, region, or locality for context.
-
-- **country**:  
-  The country for context.
-
-- **major_theme_obstacles**:  
-  A list of known obstacles from the local community, included in the prompt for additional context.
-
----
-
-## Example Configuration (`config.yaml`)
-
-Place a file named `config.yaml` in your project directory with content like:
+1. **Create a project directory** under `projects/` and add a `config.yaml`:
 
 ```yaml
-future_picture: "Increase community access to healthy food"
-root_node_name: "Access to Healthy Food"
-root_question: "What are the main obstacles to increasing community access to healthy food?"
-locality: "Springfield"
+future_picture: "Reduce loneliness in New York City"
+root_node_name: "Un-Lonely NYC"
+root_question: "What are the obstacles to reducing loneliness in New York City?"
+locality: "New York"
 country: "USA"
 major_theme_obstacles:
-  - "Lack of grocery stores"
-  - "Limited public transportation"
-  - "High food prices"
+  - "Urban anonymity"
+  - "High cost of living"
+  - "Digital dependency"
+```
+
+2. **Activate your Python environment:**
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+3. **Run the GOSR scripts:**
+
+```sh
+python scripts/main/g2o.py projects/unlonely-nyc/
+python scripts/main/o2s.py projects/unlonely-nyc/
+python scripts/main/s2r.py projects/unlonely-nyc/
+```
+
+4. **Clean and export data:**
+
+```sh
+python scripts/utils/raw2resources.py projects/unlonely-nyc/
+python scripts/convert/json2doc.py projects/unlonely-nyc/ --stage r
+python scripts/convert/json2mm.py projects/unlonely-nyc/ --stage s
 ```
 
 ---
 
-## Running the Project
+## Script Reference
 
-1. **Activate your virtual environment** (see below).
+To help you automate each stage of the GOSR workflow and manage your outputs, this section documents the main scripts, their purpose, and usage.
 
-2. **Ensure your `.env` file is in the project root** with your OpenAI credentials:
-   ```
-   OPENAI_API_KEY=sk-...
-   OPENAI_ORG=org-...
-   ```
+### Core GOSR Scripts (scripts/main)
 
-3. **Create a new project directory in `projects/`** and add a `config.yaml` file as shown above.
-
-4. **Run the GOSR workflow:**
-
-   ```sh
-   # Generate obstacles
-   python scripts/main/g2o.py path-to-project
-
-   # Generate solutions
-   python scripts/main/o2s.py path-to-project
-
-   # Generate resources
-   python scripts/main/s2r.py path-to-project
-   ```
-
-5. **Clean `resources-raw.json` into `resources.json`:**
-   ```sh
-   python scripts/utils/raw2resources.py path-to-project
-   ```
-
-6. **(Optional) Use conversion/export scripts:**
-
-   - **Generate DOCX outline:**
+1. **g2o.py**  
+   - Purpose: AI-assisted generation of Obstacles from your defined Goal.  
+   - Usage:
      ```sh
-     python scripts/convert/json2doc.py path-to-project --stage s
-     python scripts/convert/json2doc.py path-to-project --stage r
+     python scripts/main/g2o.py <project_dir> [--model MODEL] [--output obstacles.json]
+     ```
+   - Outputs: `obstacles.json` in the project directory.
+
+2. **o2s.py**  
+   - Purpose: AI-assisted brainstorming of Solutions for each obstacle.  
+   - Usage:
+     ```sh
+     python scripts/main/o2s.py <project_dir> [--model MODEL] [--output solutions.json]
+     ```
+   - Inputs: `obstacles.json`  
+   - Outputs: `solutions.json`
+
+3. **s2r.py**  
+   - Purpose: AI-assisted discovery and mapping of Resources to each solution.  
+   - Usage:
+     ```sh
+     python scripts/main/s2r.py <project_dir> [--model MODEL] [--output resources_raw.json]
+     ```
+   - Inputs: `solutions.json`  
+   - Outputs: `resources_raw.json`
+
+### Utility Scripts (scripts/utils)
+
+1. **raw2resources.py**  
+   - Purpose: Clean and normalize the raw resource output into a structured `resources.json`.  
+   - Usage:
+     ```sh
+     python scripts/utils/raw2resources.py <project_dir>
+     ```
+   - Inputs: `resources_raw.json`  
+   - Outputs: `resources.json`
+
+2. **recheck_resource_urls.py**  
+   - Purpose: Validate and fix broken URLs in `resources.json`.  
+   - Usage:
+     ```sh
+     python scripts/utils/recheck_resource_urls.py <project_dir> [--timeout SECONDS]
+     ```
+   - Inputs/Outputs: `resources.json`
+
+### Conversion & Export Scripts (scripts/convert)
+
+1. **json2doc.py**  
+   - Purpose: Export your G/O/S/R data to a Word document.  
+   - Usage:
+     ```sh
+     python scripts/convert/json2doc.py <project_dir> --stage <g|o|s|r> [--format docx]
+     ```
+   - Example:
+     ```sh
+     python scripts/convert/json2doc.py projects/unlonely-nyc --stage r
      ```
 
-   - **Generate FreeMind mind map:**
+2. **json2mm.py**  
+   - Purpose: Export Solutions (or any stage) as a mind-map (`.mm` format).  
+   - Usage:
      ```sh
-     python scripts/convert/json2mm.py path-to-project --stage s
-     python scripts/convert/json2mm.py path-to-project --stage r
+     python scripts/convert/json2mm.py <project_dir> --stage <g|o|s|r>
      ```
 
-   - **Generate Google Maps CSVs and mailing list:**
+3. **r2google-maps.py**  
+   - Purpose: Generate a Google Maps HTML overlay of your resources.  
+   - Usage:
      ```sh
-     python scripts/convert/r2google-maps.py path-to-project
-     ```
-
-   - **Fix solution/resource mappings:**
-     ```sh
-     python scripts/convert/json2map.py path-to-project --stage r
-     python scripts/convert/json2map.py path-to-project --stage s
-     ```
-
-   - **Recheck and clean resource URLs:**
-     ```sh
-     python scripts/utils/recheck_resource_urls.py path-to-project
+     python scripts/convert/r2google-maps.py <project_dir> [--output map.html]
      ```
 
 ---
 
-## Setting up a Python Virtual Environment
+## Example Outputs
 
-1. **Create a virtual environment (recommended: `.venv`):**
+- Google Maps with resource overlays:  
+  - NYC: https://www.google.com/maps/d/viewer?mid=1jfIz0rAfu2L8w3gEdjKIxq0BfDGMr3E  
+  - Nova Scotia: https://www.google.com/maps/d/viewer?mid=1AJY1yIR4D8bH1LMCGz9fKRLSn8mU5fg
 
-   On Linux/macOS/WSL:
-   ```sh
-   python3 -m venv .venv
-   ```
-
-   On Windows:
-   ```sh
-   python -m venv .venv
-   ```
-
-2. **Activate the virtual environment:**
-
-   On Linux/macOS/WSL:
-   ```sh
-   source .venv/bin/activate
-   ```
-
-   On Windows:
-   ```sh
-   .venv\Scripts\activate
-   ```
-
-3. **Install dependencies:**
-   ```sh
-   pip install -r requirements.txt
-   ```
-
-4. **(Optional) Add new packages:**
-   ```sh
-   pip install <package-name>
-   pip freeze > requirements.txt
-   ```
-
-5. **Deactivate the environment when done:**
-   ```sh
-   deactivate
-   ```
-
-**Note:**  
-- Always activate your virtual environment before running scripts.
-- Never commit your `.env` file or `.venv` directory to git.
+- Use Case: Reducing Urban Anonymity  
+  - Obstacle: Lack of social cohesion  
+  - Solution: Intergenerational activities, community gardens, mentorships  
+  - Resource Map: Community centers, NGOs, government programs
 
 ---
 
-## Reference
+## Contributing / Future Work
 
-For more details on the GOSR process, see  
-https://docs.google.com/presentation/d/1wLkb61LRHV_3o0JqQnr0yeqTPRzzKiLhw0elX2_o6M8/edit?slide=id.g1ff3a93b48e_0_5
+We're actively looking to:
+- Build a visualization tool for dynamic GOSR maps
+- Improve AI alignment and validation tools
+- Support community-run "Backbone Organizations" to maintain models
 
-**Tip:**  
-You can create multiple project directories for different goals or communities and run the workflow independently for each.
+Contact: [team.earth contact page](https://team.earth/#contact)
+
+---
+
+## License
+
+MIT License
