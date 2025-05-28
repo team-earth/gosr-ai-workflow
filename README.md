@@ -129,7 +129,7 @@ Automate each stage of the GOSR workflow with these scripts. All “main” scri
    - Outputs:  
      - r.json (or `resources_raw.json`).
 
-### Utility Scripts ([utils](http://_vscodecontentref_/0))
+### Utility Scripts (`scripts/utils`)
 
 - **raw2resources.py**  
   - Purpose: Clean & normalize `resources_raw.json` into `resources.json`.  
@@ -145,7 +145,7 @@ Automate each stage of the GOSR workflow with these scripts. All “main” scri
     python scripts/utils/recheck_resource_urls.py <project_dir> [--timeout SECONDS]
     ```
 
-### Conversion & Export Scripts ([convert](http://_vscodecontentref_/1))
+### Conversion & Export Scripts (`scripts/convert`)
 
 - **json2doc.py**  
   - Purpose: Build a DOCX outline (with headings, bookmarks, and hyperlinks) from your s.json/r.json and `resources.json`.  
@@ -165,11 +165,19 @@ Automate each stage of the GOSR workflow with these scripts. All “main” scri
     ```
 
 - **r2google-maps.py**  
-  - Purpose: Generate a Google Maps HTML overlay from `resources.json`.  
+  - Purpose: Generate an interactive Google Maps HTML overlay from your cleaned `resources.json`.  
   - Usage:
     ```bash
-    python scripts/convert/r2google-maps.py <project_dir> [--output map.html]
+    python scripts/convert/r2google-maps.py <project_dir> [--output map.html] [--api-key YOUR_API_KEY]
     ```
+  - Inputs:
+    - config`.yaml` (for map center, zoom, etc., if configured)  
+    - `resources.json` (the normalized list of resources with latitude/longitude)  
+  - Outputs:
+    - `map.html` (default name; specify via `--output`)  
+  - Options:
+    - `--output <filename>`: Specify the output HTML filename (default: `map.html`).  
+    - `--api-key <key>`: Provide a Google Maps API key if you want embedded map tiles.
 
 ---
 
