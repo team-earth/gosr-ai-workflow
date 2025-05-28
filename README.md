@@ -103,9 +103,9 @@ Automate each stage of the GOSR workflow with these scripts. All “main” scri
      python scripts/main/g2o.py <project_dir>
      ```
    - Inputs:  
-     - [config.yaml](http://_vscodecontentref_/0) (must include `future_picture`, `root_node_name`, `root_question`, `locality`, `country`, etc.)  
+     - config.yaml (must include `future_picture`, `root_node_name`, `root_question`, `locality`, `country`, etc.)  
    - Outputs:  
-     - `o.json` (or `obstacles.json`), a structured list of obstacles.
+     - o.json (or `obstacles.json`), a structured list of obstacles.
 
 2. **o2s.py**  
    - Purpose: Generate a first-draft list of Solutions for each obstacle.  
@@ -114,9 +114,9 @@ Automate each stage of the GOSR workflow with these scripts. All “main” scri
      python scripts/main/o2s.py <project_dir>
      ```
    - Inputs:  
-     - The obstacles file produced by `g2o.py` (`o.json` or `obstacles.json`).  
+     - The obstacles file produced by `g2o.py` (o.json or `obstacles.json`).  
    - Outputs:  
-     - [s.json](http://_vscodecontentref_/1) (or `solutions.json`).
+     - s.json (or `solutions.json`).
 
 3. **s2r.py**  
    - Purpose: Generate a first-draft list of Resources for each solution.  
@@ -125,11 +125,11 @@ Automate each stage of the GOSR workflow with these scripts. All “main” scri
      python scripts/main/s2r.py <project_dir>
      ```
    - Inputs:  
-     - The solutions file from `o2s.py` ([s.json](http://_vscodecontentref_/2) or `solutions.json`).  
+     - The solutions file from `o2s.py` (s.json or `solutions.json`).  
    - Outputs:  
-     - [r.json](http://_vscodecontentref_/3) (or `resources_raw.json`).
+     - r.json (or `resources_raw.json`).
 
-### Utility Scripts ([utils](http://_vscodecontentref_/4))
+### Utility Scripts ([utils](http://_vscodecontentref_/0))
 
 - **raw2resources.py**  
   - Purpose: Clean & normalize `resources_raw.json` into `resources.json`.  
@@ -145,20 +145,20 @@ Automate each stage of the GOSR workflow with these scripts. All “main” scri
     python scripts/utils/recheck_resource_urls.py <project_dir> [--timeout SECONDS]
     ```
 
-### Conversion & Export Scripts ([convert](http://_vscodecontentref_/5))
+### Conversion & Export Scripts ([convert](http://_vscodecontentref_/1))
 
-- **[json2doc.py](http://_vscodecontentref_/6)**  
-  - Purpose: Build a DOCX outline (with headings, bookmarks, and hyperlinks) from your [s.json](http://_vscodecontentref_/7)/[r.json](http://_vscodecontentref_/8) and `resources.json`.  
+- **json2doc.py**  
+  - Purpose: Build a DOCX outline (with headings, bookmarks, and hyperlinks) from your s.json/r.json and `resources.json`.  
   - Usage:
     ```bash
     python scripts/convert/json2doc.py <project_dir> --stage <s|r>
     ```
   - Flags:
-    - `--stage s` to document solutions ([s.json](http://_vscodecontentref_/9))
-    - `--stage r` to document resources ([r.json](http://_vscodecontentref_/10) + `resources.json`)
+    - `--stage s` to document solutions (s.json)
+    - `--stage r` to document resources (r.json + `resources.json`)
 
 - **json2mm.py**  
-  - Purpose: Export any stage (`g`, `o`, [s](http://_vscodecontentref_/11), or [r](http://_vscodecontentref_/12)) as a FreeMind mind-map (`.mm`).  
+  - Purpose: Export any stage (`g`, `o`, `s`, or `r`) as a FreeMind mind-map (`.mm`).  
   - Usage:
     ```bash
     python scripts/convert/json2mm.py <project_dir> --stage <g|o|s|r>
