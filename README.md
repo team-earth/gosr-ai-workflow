@@ -165,19 +165,20 @@ Automate each stage of the GOSR workflow with these scripts. All “main” scri
     ```
 
 - **r2google-maps.py**  
-  - Purpose: Generate an interactive Google Maps HTML overlay from your cleaned `resources.json`.  
+  - Purpose: Extract resources from `r.json` and `resources.json`, generating CSV files for Google Maps import (one per top-level obstacle theme) and a combined mailing list.  
   - Usage:
     ```bash
-    python scripts/convert/r2google-maps.py <project_dir> [--output map.html] [--api-key YOUR_API_KEY]
+    python scripts/convert/r2google-maps.py <project_dir>
     ```
   - Inputs:
-    - config`.yaml` (for map center, zoom, etc., if configured)  
-    - `resources.json` (the normalized list of resources with latitude/longitude)  
+    - `config.yaml`
+    - `r.json` (hierarchical resource tree)
+    - `resources.json` (normalized resource list)
   - Outputs:
-    - `map.html` (default name; specify via `--output`)  
-  - Options:
-    - `--output <filename>`: Specify the output HTML filename (default: `map.html`).  
-    - `--api-key <key>`: Provide a Google Maps API key if you want embedded map tiles.
+    - `<project_dir>/Google Maps/<theme>.csv` for each top-level theme
+    - `<project_dir>/mailing_list.csv`
+  - Dependencies:
+    - `pyyaml`
 
 ---
 
