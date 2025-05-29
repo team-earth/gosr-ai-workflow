@@ -49,9 +49,9 @@ import logging.handlers
 import sys
 import yaml
 import os
-from utils import call_gpt4, load_tree, tree, setup_openai
-from r_stats import run_stats, r_normalize, get_program_value, get_organization_value
-import utils
+from gosr.lib.utils import call_gpt4, load_tree, tree, setup_openai
+from gosr.experimental.r_stats import run_stats, r_normalize, get_program_value, get_organization_value
+import gosr.lib.utils as utils
 from datetime import datetime
 
 # Set up the logger for this script

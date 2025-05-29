@@ -80,7 +80,7 @@ import time
 import requests
 import yaml
 import re
-from utils import (
+from gosr.lib.utils import (
     tree, call_gpt4, insert_nodes, setup_openai, setup_logging,
     normalize_data, cache4
 )
