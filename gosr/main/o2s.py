@@ -25,7 +25,7 @@ import sys
 import yaml
 from datetime import datetime
 
-from utils import (
+from gosr.lib.utils import (
     call_gpt4,
     load_tree,
     tree,
