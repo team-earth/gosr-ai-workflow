@@ -50,7 +50,7 @@ import sys
 import yaml
 import os
 from gosr.lib.utils import call_gpt4, load_tree, tree, setup_openai
-from gosr.experimental.r_stats import run_stats, r_normalize, get_program_value, get_organization_value
+from gosr.lib.r_stats import run_stats, r_normalize, get_program_value, get_organization_value
 import gosr.lib.utils as utils
 from datetime import datetime
 
