@@ -206,6 +206,45 @@ Contact: [team.earth contact page](https://team.earth/#contact)
 
 ---
 
+
+
+## Running Tests
+
+This project uses `pytest` for testing.  
+A `Makefile` is provided for convenience.
+
+### To run all tests:
+
+```bash
+make
+```
+
+This will execute:
+
+```bash
+python -m pytest tests/
+```
+
+### To run tests manually:
+
+```bash
+python -m pytest tests/
+```
+
+### Cleaning up Python bytecode
+
+To remove all `.pyc` files and `__pycache__` directories (not needed for git-tracked files if your `.gitignore` is correct):
+
+```bash
+find . -name "*.pyc" -delete
+find . -name "__pycache__" -type d -exec rm -rf {} +
+```
+
+### Note
+
+- Make sure you have all dependencies installed (see `requirements.txt` or `pyproject.toml`).
+- The `.gitignore` is set up to prevent `.pyc` files and `__pycache__` directories from being committed.
+
 ## License
 
 MIT License
