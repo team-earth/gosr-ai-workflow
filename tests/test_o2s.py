@@ -3,6 +3,7 @@ import sys
 import os
 import json
 import tempfile
+import pytest
 
 def test_main_usage_error(monkeypatch, capsys):
     monkeypatch.setenv("OPENAI_API_KEY", "dummy")
@@ -72,3 +73,16 @@ def test_add_solutions4_raises_if_config_none():
         assert False, "Expected ValueError"
     except ValueError as e:
         assert "Configuration not loaded" in str(e)
+
+def test_main_malformed_config(monkeypatch, tmp_path):
+    import sys
+    import yaml
+    from gosr.main import o2s
+    # Create a malformed config.yaml
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text("not: valid: yaml: [")
+    monkeypatch.setattr(sys, "argv", ["o2s.py", str(tmp_path)])
+    # Create a minimal o.json
+    (tmp_path / "o.json").write_text("{}")
+    with pytest.raises(yaml.YAMLError):
+        o2s.main()
