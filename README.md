@@ -6,6 +6,8 @@ This project implements the **GOSR** (Goal ← Obstacles ← Solutions ← Resou
 
 Inspired by systems thinking and grounded in cognitive problem-solving theory, GOSR helps communities map out the path from a future vision to the local resources that can help realize it. It supports stakeholders in building a **shared language**, fostering **collective agency**, and visualizing an actionable roadmap.
 
+**Important**: GOSR facilitates **alignment through transparency**, not coordination through control. The framework enables voluntary self-organization by making problem structures and existing resources visible to all stakeholders.
+
 ### Purpose
 This toolkit provides:
 - A structured process for turning complex goals into actionable maps.
@@ -30,6 +32,8 @@ In traditional settings, the GOSR process takes 3–6 months via stakeholder mee
 | Subdivide Obstacles  | AI generates 100 sub-parts   | 30 min              |
 | Map Solutions (S)    | AI brainstorms 1,000 ideas   | 12 hours (½ day)    |
 | Suggest Resources (R)| AI identifies 1K–5K resources| 120 hours (5 days)  |
+
+**Beyond Mapping**: These AI-generated maps serve as foundation data for computational research, including agent-based modeling studies of civic ecosystem dynamics and collaborative effectiveness.
 
 ---
 
