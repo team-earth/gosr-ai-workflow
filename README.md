@@ -210,6 +210,14 @@ Contact: [team.earth contact page](https://team.earth/#contact)
 
 ---
 
+## Monitoring and Progress Tracking
+
+While the current GOSR work is focused on mapping and structuring the super-ordinate goal, obstacles, solutions, and resources, we recognize that monitoring real-world progress is a critical next step. Tracking in real time what is actually being implemented—and making that visible to all participants—is essential for understanding impact and motivating further action.
+
+These monitoring, feedback, and progress visualization capabilities—such as linking actions to actors, tracking implementation over time, and visualizing progress—are on our roadmap for future development.
+
+We see this as an important area for development and welcome ideas, feedback, and collaboration from anyone interested in helping to develop these features.
+
 
 
 ## Running Tests
